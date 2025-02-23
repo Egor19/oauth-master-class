@@ -14,10 +14,18 @@ const authorize = ({
 
   document.getElementById("greeting").innerText = `Привет, ${realName}! Добро пожаловать на сайт!`;
 
-  document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
+ // document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
 
-    // Теперь находим кнопку "Выйти" и вешаем обработчик
-    document.getElementById("logout").addEventListener("click", logout);
+   // Добавляем сразу всё разом
+   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}${logoutButton}`;
+
+   // Ждем, пока кнопка "Выйти" добавится в DOM
+   setTimeout(() => {
+     const logoutBtn = document.getElementById("logout");
+     if (logoutBtn) {
+       logoutBtn.addEventListener("click", logout);
+     }
+   }, 0);
   
 };
 
