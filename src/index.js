@@ -20,7 +20,7 @@ window.onload = () => {
       {
         client_id: "7cd4e6df492d4ce3b3245a151ec61604",
         response_type: "token",
-        redirect_uri: "https://oauth-master-class-one.vercel.app?do=auth-social&provider=yandex",
+        redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
       },
       "https://oauth-master-class-one.vercel.app",
       
