@@ -1,7 +1,11 @@
+const logoutButton = `<button id="logout">Выйти</button>`;
+
+
 const authorize = ({
   default_avatar_id: defaultAvatarId,
   display_name: displayName,
   real_name: realName
+  
 }) => {
   const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.yandex.net/get-yapic/${defaultAvatarId}/islands-middle')"></div>`;
   const nameHtml = `<div class="name">${displayName}</div>`;
@@ -9,6 +13,8 @@ const authorize = ({
   document.getElementById("greeting").innerText = `Привет, ${realName}! Добро пожаловать на сайт!`;
 
   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
+
+  document.getElementById("logout").addEventListener("click", logout);
 };
 
 const fetchYandexData = (token) =>
@@ -16,26 +22,47 @@ const fetchYandexData = (token) =>
     (res) => res.json()
   );
 
+  const saveToken = (token) => {
+    localStorage.setItem("yandex_token", token);
+};
 
-window.onload = () => {
-  document.getElementById("suggest").onclick = () => {
-    YaAuthSuggest.init(
-      {
-        client_id: "7cd4e6df492d4ce3b3245a151ec61604",
-        response_type: "token",
-        redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
-      },
-      "https://oauth-master-class-one.vercel.app",
-      
-    )
-      .then(({ handler }) => handler())
-      .then(async(data) => {
-        const result = await fetchYandexData(data.access_token);
+const getToken = () => {
+    return localStorage.getItem("yandex_token");
+};
 
-        authorize(result);
+const logout = () => {
+    localStorage.removeItem("yandex_token");
+    location.reload();
+};
 
-        console.log(result, data);
-      })
-      .catch((error) => console.log("Что-то пошло не так: ", error));
-  };
+window.onload = async () => {
+  const savedToken = getToken();
+
+    if (savedToken) {
+        const userData = await fetchYandexData(savedToken);
+        if (userData.display_name) {
+            authorize(userData);
+            return;
+        } else {
+            logout(); // Если токен невалидный, выходим
+        }
+    }
+
+    document.getElementById("suggest").onclick = () => {
+        YaAuthSuggest.init(
+            {
+                client_id: "7cd4e6df492d4ce3b3245a151ec61604",
+                response_type: "token",
+                redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
+            },
+            "https://oauth-master-class-one.vercel.app"
+        )
+        .then(({ handler }) => handler())
+        .then(async (data) => {
+            saveToken(data.access_token);
+            const result = await fetchYandexData(data.access_token);
+            authorize(result);
+        })
+        .catch((error) => console.log("Ошибка авторизации: ", error));
+    };
 };
