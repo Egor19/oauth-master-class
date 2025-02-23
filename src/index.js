@@ -3,7 +3,7 @@ const authorize = ({
   display_name: displayName,
 }) => {
   const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.mds.yandex.net/getyapic/${defaultAvatarId}/islands-middle')"></div>`;
-  const nameHtml = `<div class="name">${avatarHtml}${nameHtml}`;
+  const nameHtml = `<div class="name">${displayName}`;
 
   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
 };
