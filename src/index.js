@@ -5,19 +5,17 @@ const authorize = ({
   default_avatar_id: defaultAvatarId,
   display_name: displayName,
   real_name: realName
-
+  
   
 }) => {
   const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.yandex.net/get-yapic/${defaultAvatarId}/islands-middle')"></div>`;
   const nameHtml = `<div class="name">${displayName}</div>`;
-  const logoutButton = `<button id="logout">Выйти</button>`;
 
   document.getElementById("greeting").innerText = `Привет, ${realName}! Добро пожаловать на сайт!`;
 
   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
 
-  document.getElementById("logout").addEventListener("click", logout) = `${logoutButton}`
-  
+  document.getElementById("logout").addEventListener("click", logout);
 };
 
 const fetchYandexData = (token) =>
