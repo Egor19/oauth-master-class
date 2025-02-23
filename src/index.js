@@ -1,33 +1,35 @@
 
 
 
-const authorize = ({
-  default_avatar_id: defaultAvatarId,
-  display_name: displayName,
-  real_name: realName
-
+const authorize = ({ default_avatar_id: defaultAvatarId, display_name: displayName, real_name: realName }) => {
+  const authContainer = document.getElementById("auth");
   
-}) => {
+  if (!authContainer) {
+      console.error("Элемент #auth не найден в DOM");
+      return;
+  }
+
   const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.yandex.net/get-yapic/${defaultAvatarId}/islands-middle')"></div>`;
   const nameHtml = `<div class="name">${displayName}</div>`;
   const logoutButton = `<button id="logout">Выйти</button>`;
 
   document.getElementById("greeting").innerText = `Привет, ${realName}! Добро пожаловать на сайт!`;
 
- // document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
+  authContainer.innerHTML = `${avatarHtml}${nameHtml}${logoutButton}`;
 
-   // Добавляем сразу всё разом
-   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}${logoutButton}`;
+  // Используем MutationObserver, чтобы убедиться, что кнопка добавлена
+  const observer = new MutationObserver(() => {
+      const logoutBtn = document.getElementById("logout");
+      if (logoutBtn) {
+          logoutBtn.addEventListener("click", logout);
+          observer.disconnect(); // Останавливаем наблюдение
+      }
+  });
 
-   // Ждем, пока кнопка "Выйти" добавится в DOM
-   setTimeout(() => {
-     const logoutBtn = document.getElementById("logout");
-     if (logoutBtn) {
-       logoutBtn.addEventListener("click", logout);
-     }
-   }, 0);
-  
+  observer.observe(authContainer, { childList: true });
 };
+
+
 
 const fetchYandexData = (token) =>
   fetch(`https://login.yandex.ru/info?format=json&oauth_token=${token}`).then(
