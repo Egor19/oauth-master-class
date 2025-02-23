@@ -1,5 +1,21 @@
+const authorize = ({
+  default_avatar_id: defaultAvatarId,
+  display_name: displayName,
+}) => {
+  const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.mds.yandex.net/getyapic/${defaultAvatarId}/islands-middle')"></div>`;
+  const nameHtml = `<div class="name">${avatarHtml}${nameHtml}`;
+
+  document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
+};
+
+const fetchYandexData = (token) =>
+  fetch(`https://login.yandex.ru/info?format=json&oauth_token=${token}`).then(
+    (res) => res.json()
+  );
+
+
 window.onload = () => {
-  document.getElementById("button").onclick = () => {
+  document.getElementById("suggest").onclick = () => {
     window.YaAuthSuggest.init(
       {
         client_id: "7cd4e6df492d4ce3b3245a151ec61604",
