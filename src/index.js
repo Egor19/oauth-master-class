@@ -23,15 +23,7 @@ window.onload = () => {
         redirect_uri: "https://oauth-master-class-one.vercel.app",
       },
       "https://oauth-master-class-one.vercel.app",
-      {
-        view: "button",
-        parentId: "buttonContainer",
-        buttonSize: "m",
-        buttonView: "main",
-        buttonTheme: "light",
-        buttonBorderRadius: "0",
-        buttonIcon: "ya",
-      }
+      
     )
       .then(({ handler }) => handler())
       .then(async(data) => {
