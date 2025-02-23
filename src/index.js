@@ -1,9 +1,12 @@
 const authorize = ({
   default_avatar_id: defaultAvatarId,
   display_name: displayName,
+  real_name: realName
 }) => {
   const avatarHtml = `<div class="avatar" style="background-image:url('https://avatars.yandex.net/get-yapic/${defaultAvatarId}/islands-middle')"></div>`;
   const nameHtml = `<div class="name">${displayName}</div>`;
+
+  document.getElementById("greeting").innerText = `Привет, ${realName}! Добро пожаловать на сайт!`;
 
   document.getElementById("auth").innerHTML = `${avatarHtml}${nameHtml}`;
 };
