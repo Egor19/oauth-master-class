@@ -31,7 +31,7 @@ window.onload = () => {
 
         authorize(result);
 
-        console.log(result, data);
+        console.log(result, data, defaultAvatarId);
       })
       .catch((error) => console.log("Что-то пошло не так: ", error));
   };
