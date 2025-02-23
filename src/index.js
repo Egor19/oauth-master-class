@@ -2,11 +2,11 @@ window.onload = () => {
   document.getElementById("button").onclick = () => {
     window.YaAuthSuggest.init(
       {
-        client_id: "c46f0c53093440c39f12eff95a9f2f93",
+        client_id: "7cd4e6df492d4ce3b3245a151ec61604",
         response_type: "token",
-        redirect_uri: "https://examplesite.com/suggest/token",
+        redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
       },
-      "https://examplesite.com",
+      "https://oauth-master-class-one.vercel.app",
       {
         view: "button",
         parentId: "buttonContainer",
@@ -18,7 +18,13 @@ window.onload = () => {
       }
     )
       .then(({ handler }) => handler())
-      .then((data) => console.log("Сообщение с токеном", data))
-      .catch((error) => console.log("Обработка ошибки", error));
+      .then(async(data) => {
+        const result = await fetchYandexData(data.access_token);
+
+        authorize(result);
+
+        console.log(result, data);
+      })
+      .catch((error) => console.log("Что-то пошло не так: ", error));
   };
 };
