@@ -132,7 +132,7 @@ window.onload = async () => {
   };
 
   document.getElementById("suggest2").addEventListener("click", function () {
-    const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; // Замените на ваш client_id
+   // const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; // Замените на ваш client_id
     const redirectUri = "https://oauth-master-class-one.vercel.app/"; // URL, куда Яндекс отправит код
     const scope = "login:email login:info"; // Разрешения
 
