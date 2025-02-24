@@ -53,7 +53,7 @@ const exchangeCodeForToken = async (code) => {
       code: code,
       client_id: clientId,
       client_secret: clientSecret,
-      redirect_uri: redirectUri,
+      redirect_uri: 'https://oauth-master-class-one.vercel.app/',
   });
 
   try {
@@ -116,9 +116,10 @@ window.onload = async () => {
   document.getElementById("suggest1").onclick = () => {
       YaAuthSuggest.init(
           {
-              client_id: clientId,
+              client_id: '7cd4e6df492d4ce3b3245a151ec61604',
               response_type: "token",
               redirect_uri: redirectUri,
+              
           },
           "https://oauth-master-class-one.vercel.app"
       )
@@ -133,7 +134,6 @@ window.onload = async () => {
 
   document.getElementById("suggest2").addEventListener("click", function () {
 
-    const scope = "login:email login:info"; // Разрешения
 
     const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
     
