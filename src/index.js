@@ -118,7 +118,7 @@ window.onload = async () => {
           {
               client_id: clientId,
               response_type: "token",
-              redirect_uri: redirectUri,
+              redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
           },
           "https://oauth-master-class-one.vercel.app"
       )
