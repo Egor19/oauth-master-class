@@ -53,9 +53,9 @@ window.onload = async () => {
   }
 
   // Если пользователь не авторизован, показываем кнопку входа
-  document.querySelector(".buttons").innerHTML = `<button id="suggest">Авторизоваться через Яндекс</button>`;
+  document.querySelector(".buttons").innerHTML = `<button id="suggest1">Авторизоваться через Яндекс</button>`;
 
-  document.getElementById("suggest").onclick = () => {
+  document.getElementById("suggest1").onclick = () => {
       YaAuthSuggest.init(
           {
               client_id: "7cd4e6df492d4ce3b3245a151ec61604",
