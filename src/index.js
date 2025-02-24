@@ -1,7 +1,3 @@
-const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; 
-const clientSecret = "8c1226eddce045bfaf5e8c51025b2b85"; 
-const redirectUri = "https://oauth-master-class-one.vercel.app/";
-
 const authorize = ({ default_avatar_id: defaultAvatarId, display_name: displayName, real_name: realName }) => {
   const authContainer = document.getElementById("auth");
   const buttonsContainer = document.querySelector(".buttons"); // Контейнер кнопки авторизации
@@ -44,7 +40,9 @@ const logout = () => {
 };
 
 const exchangeCodeForToken = async (code) => {
- // Должно совпадать с указанным в Яндекс OAuth
+  const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; 
+  const clientSecret = "8c1226eddce045bfaf5e8c51025b2b85"; // Замени на свой
+  const redirectUri = "https://oauth-master-class-one.vercel.app/"; // Должно совпадать с указанным в Яндекс OAuth
 
   const tokenUrl = "https://oauth.yandex.ru/token";
   
@@ -116,7 +114,7 @@ window.onload = async () => {
   document.getElementById("suggest1").onclick = () => {
       YaAuthSuggest.init(
           {
-              client_id: clientId,
+              client_id: "7cd4e6df492d4ce3b3245a151ec61604",
               response_type: "token",
               redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
           },
@@ -128,11 +126,12 @@ window.onload = async () => {
               const result = await fetchYandexData(data.access_token);
               authorize(result);
           })
-          .catch((error) => console.log("Ошибка авторизации: ", error, JSON.stringify(error)));
+          .catch((error) => console.log("Ошибка авторизации: ", error));
   };
 
   document.getElementById("suggest2").addEventListener("click", function () {
-
+    const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; // Замените на ваш client_id
+    const redirectUri = "https://oauth-master-class-one.vercel.app/"; // URL, куда Яндекс отправит код
     const scope = "login:email login:info"; // Разрешения
 
     const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
