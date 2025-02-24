@@ -83,6 +83,7 @@ window.onload = async () => {
     const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
     console.log(authUrl)
     window.location.href = authUrl; // Перенаправляем пользователя
+    console.log(authUrl)
 });
 
 
