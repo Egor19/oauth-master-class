@@ -39,6 +39,49 @@ const logout = () => {
   location.reload();
 };
 
+const exchangeCodeForToken = async (code) => {
+  const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; // Замени на свой
+  const clientSecret = "8c1226eddce045bfaf5e8c51025b2b85"; // Замени на свой
+  const redirectUri = "https://oauth-master-class-one.vercel.app/"; // Должно совпадать с указанным в Яндекс OAuth
+
+  const tokenUrl = "https://oauth.yandex.ru/token";
+  
+  const params = new URLSearchParams({
+      grant_type: "authorization_code",
+      code: code,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUri,
+  });
+
+  try {
+      const response = await fetch(tokenUrl, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params,
+      });
+
+      const data = await response.json();
+
+      if (data.access_token) {
+          console.log("Получен токен:", data.access_token);
+          saveToken(data.access_token);
+
+          const userData = await fetchYandexData(data.access_token);
+          authorize(userData);
+
+          // Очистка URL от ?code=...
+          window.history.replaceState(null, "", "/");
+      } else {
+          console.error("Ошибка получения токена:", data);
+      }
+  } catch (error) {
+      console.error("Ошибка обмена кода на токен:", error);
+  }
+};
+
 
 
 window.onload = async () => {
