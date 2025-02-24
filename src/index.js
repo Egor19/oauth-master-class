@@ -1,5 +1,5 @@
 const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; 
-const clientSecret = "8c1226eddce045bfaf5e8c51025b2b85"; // Замени на свой
+const clientSecret = "8c1226eddce045bfaf5e8c51025b2b85"; 
 const redirectUri = "https://oauth-master-class-one.vercel.app/";
 
 const authorize = ({ default_avatar_id: defaultAvatarId, display_name: displayName, real_name: realName }) => {
@@ -132,7 +132,7 @@ window.onload = async () => {
   };
 
   document.getElementById("suggest2").addEventListener("click", function () {
-    const clientId =clientId; // Замените на ваш client_id
+    //const clientId =clientId; // Замените на ваш client_id
     const redirectUri = redirectUri; // URL, куда Яндекс отправит код
     const scope = "login:email login:info"; // Разрешения
 
