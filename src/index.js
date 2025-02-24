@@ -81,9 +81,11 @@ window.onload = async () => {
     const scope = "login:email login:info"; // Разрешения
 
     const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
-    console.log(authUrl); // Лог останется
+    
+    localStorage.setItem("last_auth_url", authUrl); // Сохранение перед редиректом
+    console.log(authUrl);
 
-    window.open(authUrl, "_blank"); // Открыть в новой вкладке
+    window.location.href = authUrl;
 });
 
 
