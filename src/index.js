@@ -39,18 +39,59 @@ const logout = () => {
   location.reload();
 };
 
-window.onload = async () => {
-  const savedToken = getToken();
+ // Функция обмена кода на токен
+ const exchangeCodeForToken = async (code) => {
+  const tokenUrl = "https://oauth.yandex.ru/token";
+  const params = new URLSearchParams();
+  params.append("grant_type", "authorization_code");
+  params.append("code", code);
+  params.append("client_id", CLIENT_ID);
+  params.append("client_secret", CLIENT_SECRET);
+  params.append("redirect_uri", REDIRECT_URI);
 
-  if (savedToken) {
-      const userData = await fetchYandexData(savedToken);
-      if (userData.display_name) {
-          authorize(userData);
-          return;
+  try {
+      const response = await fetch(tokenUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params,
+      });
+
+      const data = await response.json();
+      console.log("Ответ от сервера:", data);
+
+      if (data.access_token) {
+          saveToken(data.access_token);
+          const result = await fetchYandexData(data.access_token);
+          authorize(result);
       } else {
-          logout(); // Если токен невалидный, выходим
+          console.error("Ошибка при обмене кода:", data);
       }
+  } catch (error) {
+      console.error("Ошибка запроса токена:", error);
   }
+};
+
+window.onload = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const authCode = urlParams.get("code"); // Извлекаем код из URL
+
+    if (authCode) {
+        console.log("Получен код авторизации:", authCode);
+        await exchangeCodeForToken(authCode); // Обмен кода на токен
+        return;
+    }
+
+    const savedToken = getToken();
+    if (savedToken) {
+        const userData = await fetchYandexData(savedToken);
+        if (userData.display_name) {
+            authorize(userData);
+            return;
+        } else {
+            logout(); // Если токен невалидный, выходим
+        }
+    }
+
 
   // Если пользователь не авторизован, показываем кнопку входа
   document.querySelector(".buttons").innerHTML = 
