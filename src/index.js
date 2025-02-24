@@ -116,7 +116,7 @@ window.onload = async () => {
   document.getElementById("suggest1").onclick = () => {
       YaAuthSuggest.init(
           {
-              client_id: "7cd4e6df492d4ce3b3245a151ec61604",
+              client_id: clientId,
               response_type: "token",
               redirect_uri: "https://oauth-master-class-one.vercel.app/token.html",
           },
@@ -132,8 +132,8 @@ window.onload = async () => {
   };
 
   document.getElementById("suggest2").addEventListener("click", function () {
-    const clientId = "7cd4e6df492d4ce3b3245a151ec61604"; // Замените на ваш client_id
-    const redirectUri = "https://oauth-master-class-one.vercel.app/"; // URL, куда Яндекс отправит код
+    const clientId =clientId; // Замените на ваш client_id
+    const redirectUri = redirectUri; // URL, куда Яндекс отправит код
     const scope = "login:email login:info"; // Разрешения
 
     const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
