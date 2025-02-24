@@ -136,7 +136,7 @@ window.onload = async () => {
    // const redirectUri = "https://oauth-master-class-one.vercel.app/"; // URL, куда Яндекс отправит код
     const scope = "login:email login:info"; // Разрешения
 
-    const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
+    const authUrl = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`
     
     localStorage.setItem("last_auth_url", authUrl); // Сохранение перед редиректом
     console.log(authUrl);
