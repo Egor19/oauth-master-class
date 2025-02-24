@@ -128,7 +128,7 @@ window.onload = async () => {
               const result = await fetchYandexData(data.access_token);
               authorize(result);
           })
-          .catch((error) => console.log("Ошибка авторизации: ", error));
+          .catch((error) => console.log("Ошибка авторизации: ", error, JSON.stringify(error)));
   };
 
   document.getElementById("suggest2").addEventListener("click", function () {
