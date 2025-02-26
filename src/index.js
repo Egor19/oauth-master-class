@@ -75,7 +75,7 @@ const exchangeCodeForToken = async (code) => {
           authorize(userData);
 
           // Очистка URL от ?code=...
-          window.history.replaceState(null, "", "/");
+        //   window.history.replaceState(null, "", "/");
       } else {
           console.error("Ошибка получения токена:", data);
       }
