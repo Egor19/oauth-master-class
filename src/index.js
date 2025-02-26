@@ -53,7 +53,7 @@ const exchangeCodeForToken = async (code) => {
       code: code,
       client_id: clientId,
       client_secret: clientSecret,
-      redirect_uri: redirectUri,
+      redirect_uri: 'redirectUri',
   });
 
   try {
