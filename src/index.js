@@ -51,8 +51,8 @@ const exchangeCodeForToken = async (code) => {
   const params = new URLSearchParams({
       grant_type: "authorization_code",
       code: code,
-      client_id: 'clientId',
-      client_secret: 'clientSecret',
+      client_id: clientId,
+      client_secret: clientSecret,
       redirect_uri: 'redirectUri',
   });
 
